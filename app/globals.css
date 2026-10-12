@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: 238 242 246;
+  --ink: 20 33 61;
+  --muted: 85 97 124;
+  --line: 203 212 225;
+  --accent: 43 80 255;
+  --tint: 223 230 255;
+  color-scheme: light;
+}
+
+.dark {
+  --paper: 15 22 41;
+  --ink: 232 236 245;
+  --muted: 154 166 192;
+  --line: 39 50 77;
+  --accent: 124 147 255;
+  --tint: 27 37 71;
+  color-scheme: dark;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body { @apply bg-paper text-ink font-body antialiased; }
+::selection { background: rgb(var(--accent)); color: rgb(var(--paper)); }
+:focus-visible { outline: 3px solid rgb(var(--accent)); outline-offset: 3px; border-radius: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
