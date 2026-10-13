@@ -47,7 +47,7 @@ export default function Navbar({ name, logo }) {
           <a
             href="#top"
             aria-label={`${name} - back to top`}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#050A18] font-display text-lg font-bold text-highlight"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-surface font-display text-lg font-bold text-highlight dark:bg-highlight dark:text-surface"
           >
             {letter}
           </a>

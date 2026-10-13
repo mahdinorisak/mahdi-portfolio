@@ -1,7 +1,8 @@
 "use client";
 import { useId, useState } from "react";
 
-const inputClass = "mt-1 w-full rounded-md border border-line bg-paper px-3 py-2 text-base text-ink";
+const inputClass =
+  "mt-1.5 w-full rounded-xl border border-line bg-paper/70 px-3.5 py-2.5 text-base text-ink placeholder:text-muted/70 transition focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30";
 
 export function Btn({ children, onClick, disabled, primary, ...rest }) {
   return (
@@ -10,8 +11,10 @@ export function Btn({ children, onClick, disabled, primary, ...rest }) {
       onClick={onClick}
       disabled={disabled}
       {...rest}
-      className={`rounded-md px-4 py-2 text-sm font-medium transition-colors disabled:opacity-50 ${
-        primary ? "bg-ink text-paper hover:bg-accent" : "border border-line hover:bg-ink hover:text-paper"
+      className={`rounded-xl px-4 py-2 text-sm font-semibold transition duration-200 disabled:cursor-not-allowed disabled:opacity-50 ${
+        primary
+          ? "bg-highlight text-[#0B132B] shadow-[0_8px_24px_-8px_rgb(var(--highlight)/0.7)] enabled:hover:-translate-y-0.5 enabled:hover:brightness-105"
+          : "border border-line bg-paper/60 hover:border-accent/50 hover:bg-tint"
       }`}
     >
       {children}
@@ -102,9 +105,9 @@ export function ArrayEditor({ items = [], onChange, blank, addLabel, titleOf, ch
   return (
     <div className="space-y-4">
       {items.map((it, i) => (
-        <div key={`${version}-${i}`} className="rounded-lg border border-line p-4">
-          <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-            <p className="font-semibold">{titleOf(it, i)}</p>
+        <div key={`${version}-${i}`} className="rounded-2xl border border-line bg-paper/50 p-4">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+            <p className="font-display text-base font-semibold">{titleOf(it, i)}</p>
             <div className="flex gap-2">
               <Btn onClick={() => move(i, -1)} disabled={i === 0} aria-label="Move up">Up</Btn>
               <Btn onClick={() => move(i, 1)} disabled={i === items.length - 1} aria-label="Move down">Down</Btn>
@@ -114,7 +117,7 @@ export function ArrayEditor({ items = [], onChange, blank, addLabel, titleOf, ch
           {children(it, (patch) => update(i, patch), i)}
         </div>
       ))}
-      <Btn onClick={() => replace([...items, blank()])}>{addLabel}</Btn>
+      <Btn onClick={() => replace([...items, blank()])}>+ {addLabel}</Btn>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 
-export default function Reveal({ children, delay = 0, className = "" }) {
+export default function Reveal({ children, delay = 0, from = "up", className = "" }) {
   const ref = useRef(null);
   const [shown, setShown] = useState(false);
 
@@ -25,12 +25,15 @@ export default function Reveal({ children, delay = 0, className = "" }) {
     return () => obs.disconnect();
   }, []);
 
+  const left = from === "left";
+  const hidden = left ? "-translate-x-16 opacity-0" : "translate-y-6 opacity-0";
+
   return (
     <div
       ref={ref}
       style={{ transitionDelay: `${delay}ms` }}
-      className={`transition-all duration-700 ease-out ${
-        shown ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+      className={`transition-all ease-out ${left ? "duration-1000" : "duration-700"} ${
+        shown ? "translate-x-0 translate-y-0 opacity-100" : hidden
       } ${className}`}
     >
       {children}

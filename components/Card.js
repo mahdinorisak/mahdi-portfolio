@@ -12,7 +12,7 @@ export default function Card({ children, delay = 0, className = "" }) {
     <Reveal delay={delay} className="flex w-full">
       <div
         onMouseMove={spotlight}
-        className={`group/card relative w-full overflow-hidden rounded-2xl border border-line bg-tint/30 p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-lg ${className}`}
+        className={`group/card relative w-full overflow-hidden rounded-2xl border border-line bg-tint/30 dark:border-highlight/40 dark:bg-highlight/20 p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-lg ${className}`}
       >
         <div
           aria-hidden="true"

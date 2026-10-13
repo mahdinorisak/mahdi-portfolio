@@ -19,7 +19,7 @@ export async function generateMetadata() {
   };
 }
 
-const KEYS = ["paper", "ink", "muted", "line", "accent", "tint", "highlight"];
+const KEYS = ["paper", "ink", "muted", "line", "accent", "tint", "highlight", "surface"];
 
 function rgb(hex) {
   const m = /^#?([0-9a-f]{6})$/i.exec(hex || "");

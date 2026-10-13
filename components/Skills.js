@@ -2,6 +2,18 @@ import Reveal from "./Reveal";
 import Card from "./Card";
 import { getSkillIcon } from "@/lib/skillIcons";
 
+function brandClass(hex) {
+  const n = parseInt(hex, 16);
+  const f = (c) => {
+    c /= 255;
+    return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+  };
+  const L = 0.2126 * f((n >> 16) & 255) + 0.7152 * f((n >> 8) & 255) + 0.0722 * f(n & 255);
+  if (L < 0.1) return "text-[color:var(--brand)] dark:text-ink";
+  if (L > 0.85) return "text-ink dark:text-[color:var(--brand)]";
+  return "text-[color:var(--brand)]";
+}
+
 export default function Skills({ skills, title }) {
   if (!skills || skills.length === 0) return null;
 
@@ -23,9 +35,9 @@ export default function Skills({ skills, title }) {
                 {(s.items || []).map((name) => {
                   const icon = getSkillIcon(name);
                   return (
-                    <li key={name} className="flex items-center gap-2 rounded-full bg-tint px-3 py-1.5 text-sm">
+                    <li key={name} className="flex items-center gap-2 rounded-full bg-tint px-3 py-1.5 dark:bg-highlight/30 text-sm">
                       {icon && (
-                        <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4 shrink-0" fill="currentColor">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" className={`h-4 w-4 shrink-0 ${brandClass(icon.hex)}`} style={{ "--brand": `#${icon.hex}` }} fill="currentColor">
                           <path d={icon.path} />
                         </svg>
                       )}

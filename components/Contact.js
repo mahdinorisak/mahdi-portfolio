@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Reveal from "./Reveal";
 import { supabaseBrowser } from "@/lib/supabaseBrowser";
 
 const defaultTopics = ["Job opportunity", "Freelance project", "Collaboration", "Just saying hello"];
@@ -55,11 +56,11 @@ export default function Contact({ contact, name, logo }) {
 
   return (
     <section id="contact" aria-labelledby="contact-title" className="px-3 pb-3 pt-20 sm:px-4 md:pt-28">
-      <div className="mx-auto max-w-6xl rounded-[2rem] bg-[#050A18] p-6 text-white sm:p-10 md:p-14">
+      <div className="mx-auto max-w-6xl rounded-3xl bg-surface p-6 text-white sm:p-10 md:p-14">
         <div className="grid gap-14 md:grid-cols-2 md:gap-16">
           <div className="order-2 md:order-1">
             <div className="flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 font-display text-lg font-bold text-highlight">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 font-display text-lg font-bold text-highlight dark:bg-highlight dark:text-surface">
                 {letter}
               </span>
               <span className="font-display text-xl font-bold">{name}</span>
@@ -122,9 +123,9 @@ export default function Contact({ contact, name, logo }) {
               </Icon>
               Contact me
             </p>
-            <h2 id="contact-title" className="mt-3 font-display text-4xl font-bold tracking-tight md:text-5xl">
+            <Reveal from="left" delay={120} className="mt-3"><h2 id="contact-title" className="font-display text-4xl font-bold tracking-tight md:text-5xl">
               Let&apos;s collaborate
-            </h2>
+            </h2></Reveal>
 
             <form onSubmit={onSubmit} className="mt-8 space-y-4">
               <div className="grid gap-4 sm:grid-cols-2">
@@ -143,9 +144,9 @@ export default function Contact({ contact, name, logo }) {
                 <div className="relative">
                   <label htmlFor="c-topic" className="sr-only">Topic</label>
                   <select id="c-topic" name="topic" defaultValue="" className={`${base} appearance-none rounded-full pr-12 [color-scheme:dark]`}>
-                    <option value="">Choose a topic</option>
+                    <option value="" className="bg-surface text-white">Choose a topic</option>
                     {topics.map((t) => (
-                      <option key={t} value={t}>{t}</option>
+                      <option key={t} value={t} className="bg-surface text-white">{t}</option>
                     ))}
                   </select>
                   <Icon className="pointer-events-none absolute right-5 top-1/2 h-4 w-4 -translate-y-1/2 text-white/70">
@@ -167,7 +168,7 @@ export default function Contact({ contact, name, logo }) {
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="inline-flex items-center gap-3 rounded-full bg-highlight px-8 py-4 font-semibold text-[#0B132B] transition-opacity hover:opacity-90 disabled:opacity-60"
+                className="group inline-flex items-center gap-3 rounded-full bg-highlight px-8 py-4 font-semibold text-[#0B132B] shadow-[0_10px_30px_-8px_rgb(var(--highlight)/0.6)] transition duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-[0_16px_40px_-8px_rgb(var(--highlight)/0.8)] active:translate-y-0 active:scale-95 disabled:opacity-60 [&>svg]:transition-transform [&>svg]:duration-300 hover:[&>svg]:translate-x-1.5"
               >
                 {status === "sending" ? "Sending..." : "Submit now"}
                 <Icon>
@@ -200,9 +201,10 @@ export default function Contact({ contact, name, logo }) {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-wrap items-center justify-between gap-3 border-t border-white/15 pt-6 text-sm text-white/70">
+        <div className="mt-16 grid items-center gap-2 border-t border-white/15 pt-6 text-center text-sm text-white/70 sm:grid-cols-[1fr_auto_1fr]">
+          <span aria-hidden="true" className="hidden sm:block" />
           <p>&copy; {new Date().getFullYear()} {name}. All rights reserved.</p>
-          <a href="#top" className="transition-colors hover:text-highlight">Back to top</a>
+          <a href="#top" className="transition-colors hover:text-highlight sm:text-right">Back to top</a>
         </div>
       </div>
     </section>

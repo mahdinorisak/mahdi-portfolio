@@ -9,7 +9,8 @@
   --line: 203 212 225;
   --accent: 43 80 255;
   --tint: 223 230 255;
-  --highlight: 183 255 114;
+  --highlight: 57 255 136;
+  --surface: 17 28 61;
   color-scheme: light;
 }
 
@@ -20,7 +21,8 @@
   --line: 39 50 77;
   --accent: 124 147 255;
   --tint: 27 37 71;
-  --highlight: 183 255 114;
+  --highlight: 57 255 136;
+  --surface: 17 28 61;
   color-scheme: dark;
 }
 

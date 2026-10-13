@@ -11,6 +11,7 @@ module.exports = {
         accent: "rgb(var(--accent) / <alpha-value>)",
         tint: "rgb(var(--tint) / <alpha-value>)",
         highlight: "rgb(var(--highlight) / <alpha-value>)",
+        surface: "rgb(var(--surface) / <alpha-value>)",
       },
       fontFamily: {
         display: ["var(--font-display)", "system-ui", "sans-serif"],

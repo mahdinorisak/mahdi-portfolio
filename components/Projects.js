@@ -53,7 +53,7 @@ export default function Projects({ projects, title }) {
                     {((p.tags && p.tags.length > 0) || p.category) && (
                       <ul className="mt-5 flex flex-wrap gap-2" aria-label="Tools and category">
                         {(p.tags || []).map((t) => (
-                          <li key={t} className="rounded-full bg-tint px-3 py-1 font-mono text-xs">
+                          <li key={t} className="rounded-full bg-tint px-3 py-1 font-mono dark:bg-highlight/30 text-xs">
                             {t}
                           </li>
                         ))}

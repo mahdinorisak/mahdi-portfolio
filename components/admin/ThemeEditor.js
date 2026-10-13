@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { Btn } from "./ui";
 
 export const defaultTheme = {
-  light: { paper: "#F3F6FA", ink: "#0B132B", muted: "#46556F", line: "#D3DBE7", accent: "#3A7500", tint: "#E7FACD", highlight: "#B7FF72" },
-  dark: { paper: "#0B132B", ink: "#EEF2F8", muted: "#A3B1C8", line: "#263256", accent: "#B7FF72", tint: "#1C2541", highlight: "#B7FF72" },
+  light: { paper: "#F3F6FA", ink: "#0B132B", muted: "#46556F", line: "#D3DBE7", accent: "#0B7A3E", tint: "#D9FBE8", highlight: "#39FF88", surface: "#111C3D" },
+  dark: { paper: "#0B132B", ink: "#EEF2F8", muted: "#A3B1C8", line: "#263256", accent: "#39FF88", tint: "#1C2541", highlight: "#39FF88", surface: "#111C3D" },
 };
 
 const names = [
@@ -15,6 +15,7 @@ const names = [
   ["accent", "Accent (links, highlights)"],
   ["tint", "Tags and status pill"],
   ["highlight", "Highlight (buttons and badges on dark areas)"],
+  ["surface", "Dark cards (hero, about, contact)"],
 ];
 
 const isHex = (v) => /^#[0-9a-fA-F]{6}$/.test(v || "");
