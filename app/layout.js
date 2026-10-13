@@ -2,6 +2,7 @@ import { Bricolage_Grotesque, Figtree, Fira_Code } from "next/font/google";
 import "./globals.css";
 import { getSettings } from "@/lib/settings";
 import { siteUrl } from "@/data/seo";
+import { Analytics } from "@vercel/analytics/next";
 
 const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-display", display: "swap" });
 const body = Figtree({ subsets: ["latin"], variable: "--font-body", display: "swap" });
@@ -56,6 +57,7 @@ export default async function RootLayout({ children }) {
           Skip to content
         </a>
         {children}
+        <Analytics />
       </body>
     </html>
   );

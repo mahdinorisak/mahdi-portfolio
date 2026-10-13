@@ -1,5 +1,5 @@
 import { siteUrl } from "@/data/seo";
 
 export default function robots() {
-  return { rules: { userAgent: "*", allow: "/" }, sitemap: `${siteUrl}/sitemap.xml` };
+  return { rules: { userAgent: "*", allow: "/", disallow: "/admin" }, sitemap: `${siteUrl}/sitemap.xml` };
 }

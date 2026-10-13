@@ -71,12 +71,12 @@ export default function Hero({ site }) {
               </span>
             </h1>
 
-            <a
+            <div className="mt-8 flex flex-wrap items-center gap-3"><a
               href="#contact"
-              className="mt-8 inline-block rounded-full bg-highlight px-7 py-3 font-semibold text-[#0B132B] shadow-[0_10px_30px_-8px_rgb(var(--highlight)/0.7)] transition hover:-translate-y-0.5 hover:opacity-95"
+              className="inline-block rounded-full bg-highlight px-7 py-3 font-semibold text-[#0B132B] shadow-[0_10px_30px_-8px_rgb(var(--highlight)/0.7)] transition hover:-translate-y-0.5 hover:opacity-95"
             >
               Hire me
-            </a>
+            </a>{site.cv && (<a href={site.cv + "?download=" + encodeURIComponent((site.name || "CV") + " CV.pdf")} className="inline-flex items-center gap-2 rounded-full border border-ink/25 bg-white/40 px-7 py-3 font-semibold backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-highlight hover:bg-highlight hover:text-[#0B132B] hover:shadow-[0_14px_34px_-8px_rgb(var(--highlight)/0.8)] active:translate-y-0 active:scale-95 dark:border-white/25 dark:bg-white/5 dark:hover:border-highlight dark:hover:bg-highlight dark:hover:text-[#0B132B] [&>svg]:transition-transform [&>svg]:duration-300 hover:[&>svg]:translate-y-0.5">Download CV<svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14" /></svg></a>)}</div>
           </div>
 
           <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">

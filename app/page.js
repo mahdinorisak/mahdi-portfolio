@@ -7,6 +7,7 @@ import Experience from "@/components/Experience";
 import Contact from "@/components/Contact";
 import { getSettings } from "@/lib/settings";
 import { siteUrl } from "@/data/seo";
+import { fixUrl } from "@/lib/url";
 
 export default async function Home() {
   const { content: c } = await getSettings();
@@ -19,7 +20,7 @@ export default async function Home() {
     jobTitle: c.role,
     url: siteUrl,
     email: contact.email,
-    sameAs: (contact.socials || []).map((s) => s.href),
+    sameAs: (contact.socials || []).map((s) => fixUrl(s.href)),
   };
 
   return (

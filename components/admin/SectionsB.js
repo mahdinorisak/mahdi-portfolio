@@ -1,5 +1,6 @@
 "use client";
 import { Field, ListText, ArrayEditor } from "./ui";
+import ImageUpload from "./ImageUpload";
 
 export function ProjectsEditor({ c, set }) {
   return (
@@ -12,6 +13,7 @@ export function ProjectsEditor({ c, set }) {
     >
       {(p, u) => (
         <div className="space-y-3">
+          <ImageUpload label="Screenshot (shown at the top of the card)" value={p.image} prefix="project" maxSide={1400} onChange={(url, path) => u({ image: url, imagePath: path })} />
           <div className="grid gap-3 sm:grid-cols-[1fr_120px]">
             <Field label="Title" value={p.title} onChange={(v) => u({ title: v })} />
             <Field label="Year" value={p.year} onChange={(v) => u({ year: v })} />

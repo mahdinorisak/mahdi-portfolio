@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Reveal from "./Reveal";
+import { fixUrl } from "@/lib/url";
 import { supabaseBrowser } from "@/lib/supabaseBrowser";
 
 const defaultTopics = ["Job opportunity", "Freelance project", "Collaboration", "Just saying hello"];
@@ -71,7 +72,7 @@ export default function Contact({ contact, name, logo }) {
                 <ul className="space-y-3 text-lg font-semibold text-white/85">
                   {socials.map((s) => (
                     <li key={s.label}>
-                      <a href={s.href} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-highlight">
+                      <a href={fixUrl(s.href)} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-highlight">
                         {s.label}
                         <span className="sr-only"> (opens in new tab)</span>
                       </a>
@@ -175,6 +176,8 @@ export default function Contact({ contact, name, logo }) {
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </Icon>
               </button>
+
+              <p className="text-xs text-white/50">Your details are only used to reply to your message.</p>
 
               <div aria-live="polite">
                 {status === "sent" && (

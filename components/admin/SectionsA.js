@@ -1,11 +1,13 @@
 "use client";
 import { Field, ListText, ArrayEditor } from "./ui";
 import PhotoUpload from "./PhotoUpload";
+import CvUpload from "./CvUpload";
 
 export function General({ c, set }) {
   return (
     <div className="space-y-4">
       <PhotoUpload c={c} set={set} />
+      <CvUpload c={c} set={set} />
       <Field label="Your name" value={c.name} onChange={(v) => set({ name: v })} />
       <Field label="Your role" value={c.role} onChange={(v) => set({ role: v })} />
       <Field label="Logo letter (shown in the navbar)" value={c.logo} onChange={(v) => set({ logo: v.slice(0, 2) })} />

@@ -1,5 +1,6 @@
 "use client";
 import Reveal from "./Reveal";
+import { fixUrl } from "@/lib/url";
 
 const link =
   "relative text-sm text-muted transition-colors hover:text-accent after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full";
@@ -39,6 +40,7 @@ export default function Projects({ projects, title }) {
                   />
 
                   <div className="relative flex flex-1 flex-col">
+                    {p.image && (<img src={p.image} alt={"Screenshot of " + p.title} loading="lazy" width="800" height="500" className="mb-5 aspect-[16/10] w-full rounded-2xl border border-line object-cover" />)}
                     <div className="flex items-start justify-between gap-3">
                       <h3 className="font-display text-xl font-semibold tracking-tight">{p.title}</h3>
                       {p.featured && (
@@ -101,12 +103,12 @@ export default function Projects({ projects, title }) {
 
                     <div className="mt-auto flex items-center gap-5 pt-6">
                       {p.live && (
-                        <a href={p.live} target="_blank" rel="noopener noreferrer" className={link}>
+                        <a href={fixUrl(p.live)} target="_blank" rel="noopener noreferrer" className={link}>
                           Live &#8599;<span className="sr-only"> for {p.title} (opens in new tab)</span>
                         </a>
                       )}
                       {p.repo && (
-                        <a href={p.repo} target="_blank" rel="noopener noreferrer" className={link}>
+                        <a href={fixUrl(p.repo)} target="_blank" rel="noopener noreferrer" className={link}>
                           Code &#8599;<span className="sr-only"> for {p.title} (opens in new tab)</span>
                         </a>
                       )}
