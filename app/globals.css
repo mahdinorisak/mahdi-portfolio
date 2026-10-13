@@ -9,6 +9,7 @@
   --line: 203 212 225;
   --accent: 43 80 255;
   --tint: 223 230 255;
+  --highlight: 183 255 114;
   color-scheme: light;
 }
 
@@ -19,15 +20,21 @@
   --line: 39 50 77;
   --accent: 124 147 255;
   --tint: 27 37 71;
+  --highlight: 183 255 114;
   color-scheme: dark;
 }
 
 html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
-body { @apply bg-paper text-ink font-body antialiased; }
+body { @apply bg-paper text-ink font-body antialiased; background-image: linear-gradient(180deg, rgb(var(--highlight) / 0.05), transparent 30rem); background-repeat: no-repeat; }
+.dark body { background-image: linear-gradient(180deg, transparent, transparent); }
 ::selection { background: rgb(var(--accent)); color: rgb(var(--paper)); }
 :focus-visible { outline: 3px solid rgb(var(--accent)); outline-offset: 3px; border-radius: 4px; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { animation: none !important; transition: none !important; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
 }

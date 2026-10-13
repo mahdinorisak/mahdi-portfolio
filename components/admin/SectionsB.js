@@ -17,9 +17,11 @@ export function ProjectsEditor({ c, set }) {
             <Field label="Year" value={p.year} onChange={(v) => u({ year: v })} />
           </div>
           <Field label="What problem did it solve?" textarea rows={2} value={p.problem} onChange={(v) => u({ problem: v })} />
-          <Field label="What did you build?" textarea rows={2} value={p.built} onChange={(v) => u({ built: v })} />
+          <Field label="Short description (shown on the card)" textarea rows={2} value={p.built} onChange={(v) => u({ built: v })} />
           <Field label="What was the result?" textarea rows={2} value={p.result} onChange={(v) => u({ result: v })} />
           <ListText label="Tools used" mode="comma" value={p.tags || []} onChange={(v) => u({ tags: v })} />
+          <Field label="Category (example: SaaS, Dashboard, Open Source)" value={p.category} onChange={(v) => u({ category: v })} />
+          <label className="flex items-center gap-2 text-sm font-medium"><input type="checkbox" checked={!!p.featured} onChange={(e) => u({ featured: e.target.checked })} className="h-4 w-4" /> Show the Featured badge</label>
           <div className="grid gap-3 sm:grid-cols-2">
             <Field label="Live website link" type="url" value={p.live} onChange={(v) => u({ live: v })} />
             <Field label="Code link (GitHub)" type="url" value={p.repo} onChange={(v) => u({ repo: v })} />
@@ -35,6 +37,8 @@ export function ContactEditor({ c, set }) {
   return (
     <div className="space-y-6">
       <Field label="Contact email" type="email" value={ct.email} onChange={(v) => set({ contact: { ...ct, email: v } })} />
+      <Field label="Phone number (leave empty to hide it)" value={ct.phone} onChange={(v) => set({ contact: { ...ct, phone: v } })} />
+      <ListText label="Topics in the form dropdown" mode="lines" value={ct.topics || []} onChange={(v) => set({ contact: { ...ct, topics: v } })} />
       <div>
         <p className="mb-3 text-sm font-medium">Social links</p>
         <ArrayEditor

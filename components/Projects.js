@@ -1,88 +1,124 @@
-import Section from "./Section";
+"use client";
+import Reveal from "./Reveal";
 
-const tones = ["--accent", "--ink", "--muted"];
+const link =
+  "relative text-sm text-muted transition-colors hover:text-accent after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full";
 
-export default function Projects({ projects }) {
+function spotlight(e) {
+  const r = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
+  e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
+}
+
+export default function Projects({ projects, title }) {
   if (!projects || projects.length === 0) return null;
 
   return (
-    <Section id="projects" title="Projects">
-      <ul className="space-y-16">
+    <section id="projects" aria-labelledby="projects-title" className="mx-auto max-w-6xl px-6 py-20 md:py-28">
+      <Reveal>
+        <p className="font-mono text-sm text-accent">03 / Projects</p>
+        <h2 id="projects-title" className="mt-3 font-display text-4xl font-bold tracking-tight md:text-5xl">
+          {title || "Selected work."}
+        </h2>
+      </Reveal>
+
+      <ul className="mt-10 grid gap-6 md:grid-cols-2">
         {projects.map((p, i) => {
-          const rows = [
-            ["Problem", p.problem],
-            ["What I built", p.built],
-            ["Result", p.result],
-          ].filter((r) => r[1]);
-
+          const description = p.built || p.problem || "";
+          const showProblem = p.problem && p.built;
           return (
-            <li key={p.title}>
-              <article className="grid gap-6 lg:grid-cols-[220px_1fr]">
-                <div
-                  aria-hidden="true"
-                  className="flex aspect-[4/3] items-end rounded-lg p-4 font-display text-6xl font-bold"
-                  style={{ backgroundColor: `rgb(var(${tones[i % tones.length]}))`, color: "rgb(var(--paper))" }}
+            <li key={p.title} className="flex">
+              <Reveal delay={(i % 2) * 120 + Math.floor(i / 2) * 60} className="flex w-full">
+                <article
+                  onMouseMove={spotlight}
+                  className="group/card relative flex w-full flex-col overflow-hidden rounded-3xl border border-line bg-tint/30 p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-xl"
                 >
-                  {p.title.charAt(0).toUpperCase()}
-                </div>
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 bg-[radial-gradient(360px_circle_at_var(--mx,50%)_var(--my,50%),rgb(var(--accent)/0.14),transparent_70%)] opacity-0 transition-opacity duration-300 group-hover/card:opacity-100"
+                  />
 
-                <div>
-                  <div className="flex items-baseline justify-between gap-4">
-                    <h3 className="font-display text-2xl font-semibold tracking-tight">{p.title}</h3>
-                    {p.year && <span className="text-sm text-muted">{p.year}</span>}
-                  </div>
+                  <div className="relative flex flex-1 flex-col">
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="font-display text-xl font-semibold tracking-tight">{p.title}</h3>
+                      {p.featured && (
+                        <span className="shrink-0 rounded-full border border-accent/40 bg-accent/10 px-3 py-1 font-mono text-xs text-accent">
+                          &#9733; Featured
+                        </span>
+                      )}
+                    </div>
 
-                  {rows.length > 0 && (
-                    <dl className="mt-4 space-y-2 leading-relaxed">
-                      {rows.map(([label, text]) => (
-                        <div key={label}>
-                          <dt className="inline font-semibold">{label}: </dt>
-                          <dd className="inline text-muted">{text}</dd>
-                        </div>
-                      ))}
-                    </dl>
-                  )}
+                    {description && <p className="mt-3 text-sm leading-relaxed text-muted">{description}</p>}
 
-                  {p.tags && p.tags.length > 0 && (
-                    <ul className="mt-4 flex flex-wrap gap-2" aria-label="Tools used">
-                      {p.tags.map((t) => (
-                        <li key={t} className="rounded bg-tint px-2.5 py-1 text-sm font-medium">
-                          {t}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                    {((p.tags && p.tags.length > 0) || p.category) && (
+                      <ul className="mt-5 flex flex-wrap gap-2" aria-label="Tools and category">
+                        {(p.tags || []).map((t) => (
+                          <li key={t} className="rounded-full bg-tint px-3 py-1 font-mono text-xs">
+                            {t}
+                          </li>
+                        ))}
+                        {p.category && (
+                          <li className="rounded-full border border-accent/40 bg-accent/10 px-3 py-1 font-mono text-xs text-accent">
+                            {p.category}
+                          </li>
+                        )}
+                      </ul>
+                    )}
 
-                  {(p.live || p.repo) && (
-                    <div className="mt-5 flex gap-6 font-medium">
+                    {(showProblem || p.result) && (
+                      <details className="group/details mt-4 text-sm">
+                        <summary className="flex cursor-pointer list-none items-center gap-2 font-medium transition-colors hover:text-accent">
+                          Case study
+                          <svg
+                            viewBox="0 0 24 24"
+                            className="h-4 w-4 transition-transform duration-300 group-open/details:rotate-180"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            aria-hidden="true"
+                          >
+                            <path d="m6 9 6 6 6-6" />
+                          </svg>
+                        </summary>
+                        <dl className="mt-3 animate-[fadeIn_0.3s_ease-out] space-y-2 leading-relaxed text-muted">
+                          {showProblem && (
+                            <div>
+                              <dt className="inline font-semibold text-ink">Problem: </dt>
+                              <dd className="inline">{p.problem}</dd>
+                            </div>
+                          )}
+                          {p.result && (
+                            <div>
+                              <dt className="inline font-semibold text-ink">Result: </dt>
+                              <dd className="inline">{p.result}</dd>
+                            </div>
+                          )}
+                        </dl>
+                      </details>
+                    )}
+
+                    <div className="mt-auto flex items-center gap-5 pt-6">
                       {p.live && (
-                        <a
-                          href={p.live}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-accent underline underline-offset-4"
-                        >
-                          Live site<span className="sr-only"> for {p.title} (opens in new tab)</span>
+                        <a href={p.live} target="_blank" rel="noopener noreferrer" className={link}>
+                          Live &#8599;<span className="sr-only"> for {p.title} (opens in new tab)</span>
                         </a>
                       )}
                       {p.repo && (
-                        <a
-                          href={p.repo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="underline underline-offset-4"
-                        >
-                          Source code<span className="sr-only"> for {p.title} (opens in new tab)</span>
+                        <a href={p.repo} target="_blank" rel="noopener noreferrer" className={link}>
+                          Code &#8599;<span className="sr-only"> for {p.title} (opens in new tab)</span>
                         </a>
                       )}
+                      {p.year && <span className="ml-auto font-mono text-xs text-muted">{p.year}</span>}
                     </div>
-                  )}
-                </div>
-              </article>
+                  </div>
+                </article>
+              </Reveal>
             </li>
           );
         })}
       </ul>
-    </Section>
+    </section>
   );
 }

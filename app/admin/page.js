@@ -5,6 +5,7 @@ import { supabaseBrowser } from "@/lib/supabaseBrowser";
 import { General, SkillsEditor, ExperienceEditor } from "@/components/admin/SectionsA";
 import { ProjectsEditor, ContactEditor } from "@/components/admin/SectionsB";
 import ThemeEditor from "@/components/admin/ThemeEditor";
+import Inbox from "@/components/admin/Inbox";
 import { Btn } from "@/components/admin/ui";
 
 const tabs = [
@@ -13,6 +14,7 @@ const tabs = [
   ["projects", "Projects"],
   ["experience", "Experience"],
   ["contact", "Contact"],
+  ["inbox", "Inbox"],
   ["colours", "Colours"],
 ];
 
@@ -147,6 +149,7 @@ export default function AdminHome() {
           {tab === "projects" && <ProjectsEditor c={content} set={set} />}
           {tab === "experience" && <ExperienceEditor c={content} set={set} />}
           {tab === "contact" && <ContactEditor c={content} set={set} />}
+          {tab === "inbox" && <Inbox />}
           {tab === "colours" && <ThemeEditor theme={theme} setTheme={setTheme} />}
         </div>
       </main>

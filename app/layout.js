@@ -1,10 +1,11 @@
-import { Bricolage_Grotesque, Figtree } from "next/font/google";
+import { Bricolage_Grotesque, Figtree, Fira_Code } from "next/font/google";
 import "./globals.css";
 import { getSettings } from "@/lib/settings";
 import { siteUrl } from "@/data/seo";
 
 const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-display", display: "swap" });
 const body = Figtree({ subsets: ["latin"], variable: "--font-body", display: "swap" });
+const mono = Fira_Code({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
 
 export async function generateMetadata() {
   const { content: site } = await getSettings();
@@ -18,7 +19,7 @@ export async function generateMetadata() {
   };
 }
 
-const KEYS = ["paper", "ink", "muted", "line", "accent", "tint"];
+const KEYS = ["paper", "ink", "muted", "line", "accent", "tint", "highlight"];
 
 function rgb(hex) {
   const m = /^#?([0-9a-f]{6})$/i.exec(hex || "");
@@ -42,7 +43,7 @@ export default async function RootLayout({ children }) {
   const css = `html:root{${vars(theme.light)}}html.dark{${vars(theme.dark)}}`;
 
   return (
-    <html lang="en" suppressHydrationWarning className={`${display.variable} ${body.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${display.variable} ${body.variable} ${mono.variable}`}>
       <head>
         <style dangerouslySetInnerHTML={{ __html: css }} />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
