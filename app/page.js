@@ -9,6 +9,8 @@ import { getSettings } from "@/lib/settings";
 import { siteUrl } from "@/data/seo";
 import { fixUrl } from "@/lib/url";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const { content: c } = await getSettings();
   const contact = c.contact || { email: "", socials: [] };

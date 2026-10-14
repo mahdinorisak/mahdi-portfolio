@@ -8,6 +8,8 @@ const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-disp
 const body = Figtree({ subsets: ["latin"], variable: "--font-body", display: "swap" });
 const mono = Fira_Code({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata() {
   const { content: site } = await getSettings();
   const title = `${site.name} | ${site.role}`;
